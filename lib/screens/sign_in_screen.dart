@@ -1,3 +1,4 @@
+import 'package:catmo_ui/app.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -193,7 +194,14 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ),
                                 Expanded(
                                   child: ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => const App(),
+                                        ),
+                                      );
+                                    },
                                     style: ButtonStyle(
                                       backgroundColor: WidgetStatePropertyAll(
                                         const Color.fromARGB(255, 85, 7, 3),
