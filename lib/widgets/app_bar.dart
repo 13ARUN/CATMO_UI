@@ -7,11 +7,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
   @override
-  Size get preferredSize => const Size.fromHeight(70);
+  Size get preferredSize => const Size.fromHeight(60);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      scrolledUnderElevation: 0,
       centerTitle: true,
       elevation: 2,
       backgroundColor: Color.fromARGB(255, 85, 7, 3),
@@ -22,13 +23,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               CircleAvatar(
                 backgroundColor: const Color.fromARGB(255, 255, 247, 243),
-                radius: 26,
+                radius: 22,
                 child: Icon(Icons.person, size: 40),
               ),
               Positioned(
                 bottom: 0,
                 right: 0,
-                child: Icon(Icons.check_circle, size: 20, color: Colors.green),
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 8,
+                  child: Icon(
+                    Icons.check_circle_rounded,
+                    size: 14,
+                    color: const Color.fromARGB(255, 0, 171, 6),
+                  ),
+                ),
                 // child: Icon(Icons.error, size: 20, color: Colors.orange),
               ),
             ],
@@ -42,7 +51,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               color: Color.fromARGB(255, 255, 247, 243),
             ),
           ),
-          // Profile Icon with 3-dot menu
           GestureDetector(
             onTap:
                 () => Navigator.push(
@@ -51,7 +59,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
             child: CircleAvatar(
               backgroundColor: const Color.fromARGB(255, 95, 95, 95),
-              radius: 26,
+              radius: 22,
               child: Icon(
                 Icons.person_3_rounded,
                 color: Colors.black,

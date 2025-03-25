@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 final List<Event> currentEvents = [
   Event('OCT', '17', 'AA Event', '08:00 PM', '05:56 PM', 'AA location'),
-  Event('MAR', '13', '1', '10:30 PM', '11:30 PM', 'Location 2'),
-  Event('MAR', '18', 'A-QR-Test2', '10:30 PM', '12:00 AM', 'Chennai'),
-  Event('MAR', '25', '12', '10:00 PM', '12:00 AM', '222'),
+  Event('MAR', '13', 'Anonymous Event', '10:30 PM', '11:30 PM', 'Location 2'),
+  Event('MAR', '18', 'Fire Drill', '10:30 PM', '12:00 AM', 'Chennai'),
+  Event('MAR', '25', 'Party', '10:00 PM', '12:00 AM', '222'),
 ];
 
 final List<Event> previousEvents = [
@@ -54,9 +54,7 @@ class _EventsScreenState extends State<EventsScreen> {
   List<Widget> _buildEventCards(List<Event> events, {bool isPrevious = false}) {
     return events.map((event) {
       return GestureDetector(
-        onTap: () {
-          // Future interaction: Navigate or show details
-        },
+        onTap: () {},
         child: Container(
           margin: const EdgeInsets.only(bottom: 16),
           width: double.infinity,

@@ -39,7 +39,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Search & Date Picker Row
             Row(
               children: [
                 Expanded(
@@ -117,7 +116,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
             const Divider(thickness: 1),
             const SizedBox(height: 4),
-            // History List
             Expanded(
               child:
                   filteredItems.isEmpty
@@ -168,7 +166,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                         ),
                                       ),
                                     ),
-                                    Icon(Icons.remove_red_eye_rounded),
+                                    Icon(Icons.more_horiz),
                                   ],
                                 ),
                               ),

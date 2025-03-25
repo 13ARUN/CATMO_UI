@@ -42,6 +42,11 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
               alarmColor: Colors.green,
               alarmIcon: Icons.waves_outlined,
             ),
+            AlarmTile(
+              alarmName: "Earthquake",
+              alarmColor: Colors.teal,
+              alarmIcon: Icons.landslide,
+            ),
           ],
         ),
       ),

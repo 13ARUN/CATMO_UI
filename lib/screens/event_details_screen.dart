@@ -1,5 +1,8 @@
-import 'package:catmo_ui/providers/bottomnav_index_provider.dart';
+import 'package:catmo_ui/app/permission_helper.dart';
+import 'package:catmo_ui/app/permissions.dart';
+import 'package:catmo_ui/providers/permissions_provider.dart';
 import 'package:catmo_ui/widgets/app_drawer.dart';
+import 'package:catmo_ui/widgets/custom_bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,7 +12,7 @@ class EventDetailsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
+    final userPermissions = ref.watch(userPermissionsProvider);
     const Color themeColor = Color(0xFF550703);
     const Color lightColor = Color(0xFFFFF7F3);
     const Color secondaryColor = Color(0xFFBA8376);
@@ -82,8 +85,6 @@ class EventDetailsScreen extends ConsumerWidget {
                   ),
 
                   const SizedBox(height: 12),
-
-                  // Alarm Info Card
                   _buildInfoCard(),
 
                   const SizedBox(height: 12),
@@ -108,87 +109,44 @@ class EventDetailsScreen extends ConsumerWidget {
 
                   const SizedBox(height: 16),
 
-                  // Detailed Report Button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.download),
-                      label: const Text('Detailed Report'),
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        backgroundColor: themeColor,
-                        foregroundColor: lightColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                  if (PermissionHelper.hasPermission(
+                    userPermissions,
+                    Permission.downloadReportsOfPastAlerts,
+                  ))
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(Icons.download),
+                        label: const Text('Detailed Report'),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          backgroundColor: themeColor,
+                          foregroundColor: lightColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          elevation: 4,
                         ),
-                        textStyle: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        elevation: 4,
                       ),
                     ),
-                  ),
                 ],
               ),
             ),
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: themeColor,
-        selectedLabelStyle: const TextStyle(fontSize: 12),
-        unselectedLabelStyle: const TextStyle(fontSize: 12),
-        iconSize: 32,
-        selectedItemColor: secondaryColor,
-        unselectedItemColor: secondaryColor,
-        onTap: (index) {
-          if (index == 0) {
-            scaffoldKey.currentState?.openDrawer();
-          } else {
-            Navigator.pop(context);
-            ref.read(bottomNavIndexProvider.notifier).state = index - 1;
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'Menu'),
-          BottomNavigationBarItem(
-            icon: Stack(
-              children: [
-                Icon(Icons.home_rounded),
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.deepOrange,
-                    radius: 8,
-                    child: Text(
-                      "1",
-                      style: TextStyle(color: Colors.white, fontSize: 10),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.event_note_rounded),
-            label: 'Events',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history_rounded),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.warning_amber_rounded),
-            label: 'Alarms',
-          ),
-        ],
+      bottomNavigationBar: CustomBottomNavbar(
+        currentIndex: 0,
+        scaffoldKey: scaffoldKey,
+        userPermissions: userPermissions,
+        ref: ref,
+        isSepScreen: true,
       ),
-      backgroundColor: Colors.grey.shade100,
     );
   }
 

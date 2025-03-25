@@ -22,13 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Active Alerts Header
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: const Color(0xFFB71C1C), // Improved red tone
+                color: const Color(0xFFB71C1C),
               ),
               child: Row(
                 children: [
@@ -64,12 +63,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 8),
-
-            // Alert Item - Requires Mustering
             _buildAlertCard(
               icon: Icons.fireplace,
               iconColor: Colors.redAccent,
-              iconBgColor: const Color(0x1AFF0000), // Light red background
+              iconBgColor: const Color(0x1AFF0000),
               title: 'E2_Test_Mustering',
               message:
                   'E2_Test_Mustering button was pressed at Monday March 24 - 08:14 AM',
@@ -79,12 +76,10 @@ class _HomeScreenState extends State<HomeScreen> {
               footerBold: true,
             ),
             const SizedBox(height: 5),
-
-            // Alert Item - Alarm Cleared
             _buildAlertCard(
               icon: Icons.check_circle,
               iconColor: Colors.green,
-              iconBgColor: const Color(0x1A00FF00), // Light green background
+              iconBgColor: const Color(0x1A00FF00),
               title: 'E2_Test_Non_Mustering',
               message:
                   'E2_Test_Non_Mustering button was pressed at Thursday March 20 - 08:55 AM',

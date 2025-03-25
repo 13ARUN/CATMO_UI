@@ -1,4 +1,7 @@
+import 'package:catmo_ui/app/permission_helper.dart';
+import 'package:catmo_ui/app/permissions.dart';
 import 'package:catmo_ui/providers/bottomnav_index_provider.dart';
+import 'package:catmo_ui/providers/permissions_provider.dart';
 import 'package:catmo_ui/screens/alarms_screen.dart';
 import 'package:catmo_ui/screens/docs_img_screen.dart';
 import 'package:catmo_ui/screens/profile_screen.dart';
@@ -10,18 +13,18 @@ class CustomDrawer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final userPermissions = ref.watch(userPermissionsProvider);
     return Drawer(
       backgroundColor: Colors.white,
       width: 340,
       child: Column(
         children: [
-          // Header
           Container(
             width: double.infinity,
             padding: const EdgeInsets.only(
               left: 16,
               right: 16,
-              top: 68,
+              top: 58,
               bottom: 28,
             ),
             decoration: const BoxDecoration(
@@ -47,7 +50,7 @@ class CustomDrawer extends ConsumerWidget {
                       style: TextStyle(color: Colors.white70, fontSize: 14),
                     ),
                     Text(
-                      'User Name',
+                      'Arun User Student1 Test',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -56,71 +59,98 @@ class CustomDrawer extends ConsumerWidget {
                     ),
                   ],
                 ),
-                const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.close, color: Colors.white),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
               ],
             ),
           ),
 
           const SizedBox(height: 12),
-
-          // Drawer Items
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               children: [
-                const SectionHeader(title: "Actions"),
-                DrawerTile(
-                  icon: Icons.warning_amber_rounded,
-                  title: "Alarms",
-                  onTap: () {
-                    Navigator.pop(context);
-                    ref.read(bottomNavIndexProvider.notifier).state = 3;
-                  },
-                ),
-                DrawerTile(
-                  icon: Icons.insert_drive_file_rounded,
-                  title: "Documents & Images",
-                  onTap:
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DocsImgScreen(),
+                if (PermissionHelper.hasAnyPermission(userPermissions, [
+                  Permission.triggerAlarms,
+                  Permission.viewDocsImages,
+                  Permission.viewPastAlerts,
+                ]))
+                  const SectionHeader(title: "Actions"),
+                if (PermissionHelper.hasPermission(
+                  userPermissions,
+                  Permission.triggerAlarms,
+                ))
+                  DrawerTile(
+                    icon: Icons.warning_amber_rounded,
+                    title: "Alarms",
+                    onTap: () {
+                      Navigator.pop(context);
+                      ref.read(bottomNavIndexProvider.notifier).state = 3;
+                    },
+                  ),
+                if (PermissionHelper.hasPermission(
+                  userPermissions,
+                  Permission.viewDocsImages,
+                ))
+                  DrawerTile(
+                    icon: Icons.insert_drive_file_rounded,
+                    title: "Documents & Images",
+                    onTap:
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DocsImgScreen(),
+                          ),
                         ),
-                      ),
-                ),
-                DrawerTile(
-                  icon: Icons.history_rounded,
-                  title: "History",
-                  onTap: () {
-                    Navigator.pop(context);
-                    ref.read(bottomNavIndexProvider.notifier).state = 2;
-                  },
-                ),
-                const SizedBox(height: 20),
+                  ),
+                if (PermissionHelper.hasPermission(
+                  userPermissions,
+                  Permission.viewPastAlerts,
+                ))
+                  DrawerTile(
+                    icon: Icons.history_rounded,
+                    title: "History",
+                    onTap: () {
+                      Navigator.pop(context);
+                      ref.read(bottomNavIndexProvider.notifier).state = 2;
+                    },
+                  ),
+                if (PermissionHelper.hasAnyPermission(userPermissions, [
+                  Permission.triggerAlarms,
+                  Permission.viewDocsImages,
+                  Permission.viewPastAlerts,
+                ]))
+                  const SizedBox(height: 20),
 
-                const SectionHeader(title: "Events"),
-                DrawerTile(
-                  icon: Icons.event_note_rounded,
-                  title: "Event Details",
-                  onTap: () {
-                    Navigator.pop(context);
-                    ref.read(bottomNavIndexProvider.notifier).state = 1;
-                  },
-                ),
-                DrawerTile(
-                  icon: Icons.qr_code_scanner_rounded,
-                  title: "Scan QR code",
-                  onTap:
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AlarmsScreen()),
-                      ),
-                ),
-                const SizedBox(height: 20),
+                if (PermissionHelper.hasPermission(
+                  userPermissions,
+                  Permission.viewEvents,
+                ))
+                  const SectionHeader(title: "Events"),
+                if (userPermissions.contains(Permission.viewEvents))
+                  DrawerTile(
+                    icon: Icons.event_note_rounded,
+                    title: "Event Details",
+                    onTap: () {
+                      Navigator.pop(context);
+                      ref.read(bottomNavIndexProvider.notifier).state = 1;
+                    },
+                  ),
+                if (PermissionHelper.hasAllPermissions(userPermissions, [
+                  Permission.viewEvents,
+                  Permission.registerForEvents,
+                ]))
+                  DrawerTile(
+                    icon: Icons.qr_code_scanner_rounded,
+                    title: "Scan QR code",
+                    onTap: () {
+                      Navigator.pop(context);
+                      ref.read(bottomNavIndexProvider.notifier).state = 1;
+                    },
+                  ),
+                if (PermissionHelper.hasPermission(
+                  userPermissions,
+                  Permission.viewEvents,
+                ))
+                  const SizedBox(height: 20),
 
                 const SectionHeader(title: "Account"),
                 DrawerTile(
@@ -146,10 +176,8 @@ class CustomDrawer extends ConsumerWidget {
               ],
             ),
           ),
-
-          // Version Info
           const Padding(
-            padding: EdgeInsets.only(bottom: 8),
+            padding: EdgeInsets.only(bottom: 24),
             child: Text(
               'v25.03.0 (100)',
               style: TextStyle(
@@ -160,24 +188,24 @@ class CustomDrawer extends ConsumerWidget {
           ),
 
           // Banner
-          Container(
-            width: double.infinity,
-            height: 100,
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-              ),
-            ),
-            padding: const EdgeInsets.all(12),
-            child: const Center(
-              child: Text(
-                "Banner",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              ),
-            ),
-          ),
+          // Container(
+          //   width: double.infinity,
+          //   height: 100,
+          //   decoration: BoxDecoration(
+          //     color: Colors.grey[200],
+          //     borderRadius: const BorderRadius.only(
+          //       topLeft: Radius.circular(16),
+          //       topRight: Radius.circular(16),
+          //     ),
+          //   ),
+          //   padding: const EdgeInsets.all(12),
+          //   child: const Center(
+          //     child: Text(
+          //       "Banner",
+          //       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -226,6 +254,7 @@ class DrawerTile extends StatelessWidget {
     return ListTile(
       dense: true,
       contentPadding: const EdgeInsets.only(bottom: 2),
+      splashColor: Colors.white,
       leading: Icon(icon, color: Colors.black),
       title: Text(
         title,
@@ -233,8 +262,6 @@ class DrawerTile extends StatelessWidget {
       ),
       onTap: onTap,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      hoverColor: Colors.grey[100],
-      splashColor: Colors.deepOrange,
     );
   }
 }
