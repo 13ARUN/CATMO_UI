@@ -153,25 +153,25 @@ class EventDetailsScreen extends ConsumerWidget {
   Widget _buildInfoCard() {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      color: Color.fromARGB(255, 255, 214, 212),
+      color: Color.fromARGB(255, 255, 238, 237),
       elevation: 3,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildInfoRow('Alarm triggered by:', 'Arun User Teacher1 Test'),
+            _buildInfoRow('Alarm triggered by :', 'Arun User Teacher1 Test'),
             const SizedBox(height: 4),
             _buildInfoRow(
-              'Triggered at:',
+              'Triggered at :',
               '21 Mar, 2025 - 11:03:57 AM',
               bold: true,
             ),
             const Divider(color: Colors.black54, height: 24),
-            _buildInfoRow('Alarm cleared by:', 'Arun User Teacher1 Test'),
+            _buildInfoRow('Alarm cleared by :', 'Arun User Teacher1 Test'),
             const SizedBox(height: 4),
             _buildInfoRow(
-              'Cleared at:',
+              'Cleared at :',
               '21 Mar, 2025 - 11:05:13 AM',
               bold: true,
             ),

@@ -74,12 +74,8 @@ class ProfileScreen extends ConsumerWidget {
                 children: [
                   CircleAvatar(
                     backgroundColor: Colors.grey.shade300,
+                    backgroundImage: AssetImage("assets/logo/mywall.jpg"),
                     radius: 50,
-                    child: const Icon(
-                      Icons.person_3_rounded,
-                      color: Colors.black87,
-                      size: 50,
-                    ),
                   ),
                   const SizedBox(height: 16),
                   const Text(

@@ -26,9 +26,10 @@ class App extends ConsumerWidget {
         index: currentIndex,
         children: [
           HomeScreen(),
-          if (userPermissions.contains(Permission.viewEvents)) EventsScreen(),
-          HistoryScreen(),
           AlarmsScreen(),
+          HistoryScreen(),
+          if (userPermissions.contains(Permission.viewEvents)) EventsScreen(),
+
         ],
       ),
       bottomNavigationBar: CustomBottomNavbar(

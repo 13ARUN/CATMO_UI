@@ -147,7 +147,7 @@ class _EventsScreenState extends State<EventsScreen> {
                           Icon(
                             Icons.location_on,
                             size: 16,
-                            color: const Color.fromARGB(255, 0, 92, 3),
+                            color: const Color.fromARGB(255, 85, 7, 3),
                           ),
                           const SizedBox(width: 4),
                           Expanded(
@@ -156,7 +156,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                   ? event.location
                                   : 'No location',
                               style: const TextStyle(
-                                color: Color.fromARGB(255, 0, 92, 3),
+                                color: Color.fromARGB(255, 85, 7, 3),
                                 fontSize: 13,
                               ),
                               overflow: TextOverflow.ellipsis,

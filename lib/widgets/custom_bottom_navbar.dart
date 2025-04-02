@@ -71,12 +71,13 @@ class CustomBottomNavbar extends StatelessWidget {
         ),
         if (PermissionHelper.hasPermission(
           userPermissions,
-          Permission.viewEvents,
+          Permission.triggerAlarms,
         ))
           BottomNavigationBarItem(
-            icon: Icon(Icons.event_note_rounded),
-            label: 'Events',
+            icon: Icon(Icons.warning_amber_rounded),
+            label: 'Alarms',
           ),
+
         if (PermissionHelper.hasPermission(
           userPermissions,
           Permission.viewPastAlerts,
@@ -87,11 +88,11 @@ class CustomBottomNavbar extends StatelessWidget {
           ),
         if (PermissionHelper.hasPermission(
           userPermissions,
-          Permission.triggerAlarms,
+          Permission.viewEvents,
         ))
           BottomNavigationBarItem(
-            icon: Icon(Icons.warning_amber_rounded),
-            label: 'Alarms',
+            icon: Icon(Icons.event_note_rounded),
+            label: 'Events',
           ),
       ],
     );
