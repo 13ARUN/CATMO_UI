@@ -2,7 +2,6 @@ import 'package:catmo_ui/app/permission_helper.dart';
 import 'package:catmo_ui/app/permissions.dart';
 import 'package:catmo_ui/providers/bottomnav_index_provider.dart';
 import 'package:catmo_ui/providers/permissions_provider.dart';
-import 'package:catmo_ui/screens/alarms_screen.dart';
 import 'package:catmo_ui/screens/docs_img_screen.dart';
 import 'package:catmo_ui/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +82,7 @@ class CustomDrawer extends ConsumerWidget {
                     title: "Alarms",
                     onTap: () {
                       Navigator.pop(context);
-                      ref.read(bottomNavIndexProvider.notifier).state = 3;
+                      ref.read(bottomNavIndexProvider.notifier).state = 1;
                     },
                   ),
                 if (PermissionHelper.hasPermission(
@@ -131,7 +130,7 @@ class CustomDrawer extends ConsumerWidget {
                     title: "Event Details",
                     onTap: () {
                       Navigator.pop(context);
-                      ref.read(bottomNavIndexProvider.notifier).state = 1;
+                      ref.read(bottomNavIndexProvider.notifier).state = 3;
                     },
                   ),
                 if (PermissionHelper.hasAllPermissions(userPermissions, [
@@ -170,7 +169,9 @@ class CustomDrawer extends ConsumerWidget {
                   onTap:
                       () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AlarmsScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => ProfileScreen(),
+                        ),
                       ),
                 ),
               ],

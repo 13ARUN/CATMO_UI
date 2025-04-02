@@ -6,8 +6,8 @@ import 'package:catmo_ui/widgets/custom_bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EventDetailsScreen extends ConsumerWidget {
-  const EventDetailsScreen({super.key});
+class HistoryDetailsScreen extends ConsumerWidget {
+  const HistoryDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -1,4 +1,4 @@
-import 'package:catmo_ui/screens/event_details_screen.dart';
+import 'package:catmo_ui/screens/history_details_screen.dart';
 import 'package:catmo_ui/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -188,7 +188,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => EventDetailsScreen(),
+                                    builder:
+                                        (context) => HistoryDetailsScreen(),
                                   ),
                                 );
                               },
