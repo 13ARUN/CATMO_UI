@@ -30,7 +30,7 @@ class _AlarmsScreenState extends State<AlarmsScreen> {
       'color': Colors.deepOrange,
       'icon': Icons.power,
     },
-    {'name': "Earthquake", 'color': Colors.amber  , 'icon': Icons.landslide},
+    {'name': "Earthquake", 'color': Colors.amber, 'icon': Icons.landslide},
   ];
 
   void clearAlarm(int index) {

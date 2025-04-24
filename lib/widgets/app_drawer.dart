@@ -65,6 +65,7 @@ class CustomDrawer extends ConsumerWidget {
           const SizedBox(height: 12),
           Expanded(
             child: ListView(
+              physics: NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 16),
               children: [
                 if (PermissionHelper.hasAnyPermission(userPermissions, [
@@ -142,7 +143,7 @@ class CustomDrawer extends ConsumerWidget {
                     title: "Scan QR code",
                     onTap: () {
                       Navigator.pop(context);
-                      ref.read(bottomNavIndexProvider.notifier).state = 1;
+                      ref.read(bottomNavIndexProvider.notifier).state = 3;
                     },
                   ),
                 if (PermissionHelper.hasPermission(

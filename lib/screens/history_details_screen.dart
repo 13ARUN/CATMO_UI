@@ -162,26 +162,18 @@ class HistoryDetailsScreen extends ConsumerWidget {
           children: [
             _buildInfoRow('Alarm triggered by :', 'Arun User Teacher1 Test'),
             const SizedBox(height: 4),
-            _buildInfoRow(
-              'Triggered at :',
-              '21 Mar, 2025 - 11:03:57 AM',
-              bold: true,
-            ),
+            _buildInfoRow('Triggered at :', '21 Mar, 2025 - 11:03:57 AM'),
             const Divider(color: Colors.black54, height: 24),
             _buildInfoRow('Alarm cleared by :', 'Arun User Teacher1 Test'),
             const SizedBox(height: 4),
-            _buildInfoRow(
-              'Cleared at :',
-              '21 Mar, 2025 - 11:05:13 AM',
-              bold: true,
-            ),
+            _buildInfoRow('Cleared at :', '21 Mar, 2025 - 11:05:13 AM'),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildInfoRow(String label, String value, {bool bold = false}) {
+  Widget _buildInfoRow(String label, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2),
       child: RichText(
@@ -192,7 +184,7 @@ class HistoryDetailsScreen extends ConsumerWidget {
             TextSpan(
               text: value,
               style: TextStyle(
-                fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+                fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
